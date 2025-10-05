@@ -13,7 +13,7 @@ namespace DungeonCrawler.Elements
         public double X { get; set; }
         public double Y { get; set; }
 
-
+        public virtual ConsoleColor Foreground { get; set; }
         public virtual void Draw()
         {
 

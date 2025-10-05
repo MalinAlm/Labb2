@@ -15,15 +15,18 @@ namespace DungeonCrawler.Elements
             Sign = 'r';
             Health = 10;
 
-            Console.ForegroundColor = ConsoleColor.Red;
+            //Console.ForegroundColor = ConsoleColor.Red;
+            Foreground = ConsoleColor.Red;
         }
 
 
-        //public override void Draw()
-        //{
-        //    Console.SetCursorPosition((int)X, (int)Y);
-        //    Console.Write(Sign);
-        //}
+        public override void Draw()
+        {
+            Console.ForegroundColor = Foreground;
+
+            Console.SetCursorPosition((int)X, (int)Y);
+            Console.Write(Sign);
+        }
 
         public override void Update()
         { 

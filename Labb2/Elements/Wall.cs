@@ -12,12 +12,14 @@ namespace DungeonCrawler.Elements
         public Wall()
         {
             Sign = '#';
-            Console.ForegroundColor = ConsoleColor.Gray;
+            //Console.ForegroundColor = ConsoleColor.Gray;
+            Foreground = ConsoleColor.Gray;
 
         }
 
         public override void Draw()
         {
+            Console.ForegroundColor = Foreground;
             Console.SetCursorPosition((int)X, (int)Y);
             Console.Write(Sign);
         }

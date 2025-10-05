@@ -13,15 +13,17 @@ namespace DungeonCrawler.Elements
             Name = "Snake";
             Sign = 's';
             Health = 25;
-            Console.ForegroundColor = ConsoleColor.Green;
+            //Console.ForegroundColor = ConsoleColor.Green;
+            Foreground = ConsoleColor.Green;
 
         }
 
-        //public override void Draw()
-        //{
-        //    Console.SetCursorPosition((int)X, (int)Y);
-        //    Console.Write(Sign);
-        //}
+        public override void Draw()
+        {   
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.SetCursorPosition((int)X, (int)Y);
+            Console.Write(Sign);
+        }
 
         public override void Update()
         {

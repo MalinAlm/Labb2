@@ -8,7 +8,6 @@ namespace DungeonCrawler.Elements
 {
     abstract class Enemy : LevelElement
     {
-
         public string Name { get; set; }
         public int Health { get; set; }
         public Dice AttackDice { get; set; }

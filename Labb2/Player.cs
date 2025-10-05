@@ -9,23 +9,49 @@ namespace DungeonCrawler
 {
     internal class Player : MainCharacter
     {
-
-        public Player()
-        {
+        public ConsoleKey? LastKey { get; set; }
+        public Player(int x, int y)
+        {           
             Name = "Beep Boop";
             Sign = '@';
             Health = 100;
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            Foreground = ConsoleColor.Magenta;
+
+            X = x;
+            Y = y;
         }
 
-        //public override void Draw()
-        //{
-        //    Console.SetCursorPosition((int)X, (int)Y);
-        //    Console.Write(Sign);
-        //}
+        public override void Draw()
+        {
+            Console.ForegroundColor = Foreground;
+            Console.SetCursorPosition((int)X, (int)Y);
+            Console.CursorVisible = false;
+            Console.Write(Sign);
+            
+        }
 
         public override void Update()
         {
+
+            if (LastKey == ConsoleKey.LeftArrow)
+            {
+                X--; 
+            }
+            else if (LastKey == ConsoleKey.RightArrow)
+            {
+                X++;
+            }
+            else if (LastKey == ConsoleKey.UpArrow)
+            {
+                Y--; 
+            }
+            else if (LastKey == ConsoleKey.DownArrow)
+            {
+                Y++; 
+            }
+
+            //Draw();
+
         }
     }
 }
