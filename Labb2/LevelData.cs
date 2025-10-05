@@ -71,5 +71,10 @@ namespace DungeonCrawler
                 element.Draw();
             }
         }
+
+        public bool IsBlocked(int x, int y)
+        {
+            return _elements.Any(element => element.X == x && element.Y == y && (element is Wall || element is Enemy));
+        }
     }
 }

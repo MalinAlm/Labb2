@@ -10,8 +10,8 @@ namespace DungeonCrawler.Elements
     {
 
         public char Sign;
-        public double X { get; set; }
-        public double Y { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
 
         public virtual ConsoleColor Foreground { get; set; }
         public virtual void Draw()

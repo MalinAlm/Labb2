@@ -26,16 +26,13 @@ namespace DungeonCrawler
                 level.Load(filePath);
 
                 var start = level.PlayerStartPosition ?? (0, 0);
-                Player player = new Player(start.X, start.Y);
+                Player player = new Player(level.PlayerStartPosition.Value.X, level.PlayerStartPosition.Value.Y, level);
 
-                //level.Draw(); //lägg ev denna här sedan för att måla ut banan en gång
             while (true)
             {
                 //TODO: pausa loop tills spelaren trycker på en tangent
-                 
-                Console.Clear();
+              
                 level.Draw();
-
                 player.Draw();
                 var key = Console.ReadKey(true).Key;
                 player.LastKey = key;

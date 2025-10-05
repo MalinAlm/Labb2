@@ -9,9 +9,11 @@ namespace DungeonCrawler
 {
     internal class Player : MainCharacter
     {
+        private readonly LevelData _level;
         public ConsoleKey? LastKey { get; set; }
-        public Player(int x, int y)
+        public Player(int x, int y, LevelData level)
         {           
+            _level = level;
             Name = "Beep Boop";
             Sign = '@';
             Health = 100;
@@ -33,6 +35,9 @@ namespace DungeonCrawler
         public override void Update()
         {
 
+            int oldXPosition = X;
+            int oldYPosition = Y;
+
             if (LastKey == ConsoleKey.LeftArrow)
             {
                 X--; 
@@ -50,7 +55,17 @@ namespace DungeonCrawler
                 Y++; 
             }
 
-            //Draw();
+            if (_level.IsBlocked( X, Y ))
+            {
+                X = oldXPosition;
+                Y = oldYPosition;
+                return;
+            }
+
+            Console.SetCursorPosition(oldXPosition, oldYPosition);
+            Console.WriteLine(' ');
+
+            Draw();
 
         }
     }
