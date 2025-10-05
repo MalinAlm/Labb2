@@ -12,7 +12,6 @@ namespace DungeonCrawler.Elements
         public Wall()
         {
             Sign = '#';
-            //Console.ForegroundColor = ConsoleColor.Gray;
             Foreground = ConsoleColor.Gray;
 
         }

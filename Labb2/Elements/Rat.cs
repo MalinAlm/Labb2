@@ -14,8 +14,6 @@ namespace DungeonCrawler.Elements
             Name = "Rat";
             Sign = 'r';
             Health = 10;
-
-            //Console.ForegroundColor = ConsoleColor.Red;
             Foreground = ConsoleColor.Red;
         }
 

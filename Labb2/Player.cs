@@ -63,7 +63,7 @@ namespace DungeonCrawler
             }
 
             Console.SetCursorPosition(oldXPosition, oldYPosition);
-            Console.WriteLine(' ');
+            Console.Write(' ');
 
             Draw();
 

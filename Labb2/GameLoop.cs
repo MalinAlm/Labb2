@@ -25,12 +25,11 @@ namespace DungeonCrawler
                 LevelData level = new LevelData();
                 level.Load(filePath);
 
-                var start = level.PlayerStartPosition ?? (0, 0);
-                Player player = new Player(level.PlayerStartPosition.Value.X, level.PlayerStartPosition.Value.Y, level);
+                var start = level.PlayerStartPosition ?? (5, 5);
+                Player player = new Player(start.X, start.Y, level);
 
             while (true)
             {
-                //TODO: pausa loop tills spelaren trycker på en tangent
               
                 level.Draw();
                 player.Draw();

@@ -19,10 +19,9 @@ namespace DungeonCrawler
         public void Load(string filename)
         {
 
-            string path = Path.Combine(filename);
             int y = 0;
 
-            using (StreamReader reader = new StreamReader(path))
+            using (StreamReader reader = new StreamReader(filename))
             {
                 string? line;
 
