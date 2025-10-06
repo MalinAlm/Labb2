@@ -1,24 +1,15 @@
 ﻿using DungeonCrawler.Elements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DungeonCrawler
 {
     internal class LevelData
     {
         public (int X, int Y)? PlayerStartPosition { get; set; }
-
         private List<LevelElement> _elements = new();
-
         public IReadOnlyList<LevelElement> Elements => _elements;
 
         public void Load(string filename)
         {
-
             int y = 0;
 
             using (StreamReader reader = new StreamReader(filename))
@@ -32,24 +23,23 @@ namespace DungeonCrawler
                     {
 
                     char sign = line[x];
-               
                     LevelElement? element = null;
 
                     switch (sign)
                     {
                         case '#':
-                                element = new Wall { X = x, Y = y, Sign = '#' };
+                                element = new Wall { X = x, Y = y };
                                 break;
                         case '@':
                                 PlayerStartPosition = (x, y);
                                 break;
                         case 'r':
-                                element = new Rat { X = x, Y = y, Sign = 'r' };
+                                element = new Rat { X = x, Y = y };
                                 break;
-                        case 's':
-                                element = new Snake { X = x, Y = y, Sign = 's' };
+                            case 's':
+                                element = new Snake { X = x, Y = y };
                                 break;
-                        default:
+                            default:
                                 break;
                     }
 

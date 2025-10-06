@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace DungeonCrawler.Elements
 {
@@ -16,7 +12,9 @@ namespace DungeonCrawler.Elements
         public virtual ConsoleColor Foreground { get; set; }
         public virtual void Draw()
         {
-
+            Console.ForegroundColor = Foreground;
+            Console.SetCursorPosition(X, Y);
+            Console.Write(Sign);
         }
 
     }

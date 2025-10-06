@@ -1,15 +1,10 @@
 ﻿using DungeonCrawler.Elements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DungeonCrawler
 {
     internal class Player : MainCharacter
     {
-        private readonly LevelData _level;
+        private LevelData _level;
         public ConsoleKey? LastKey { get; set; }
         public Player(int x, int y, LevelData level)
         {           
@@ -26,10 +21,10 @@ namespace DungeonCrawler
         public override void Draw()
         {
             Console.ForegroundColor = Foreground;
-            Console.SetCursorPosition((int)X, (int)Y);
+            Console.SetCursorPosition(X, Y);
             Console.CursorVisible = false;
             Console.Write(Sign);
-            
+
         }
 
         public override void Update()

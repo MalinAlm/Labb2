@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace DungeonCrawler.Elements
 {
@@ -13,7 +9,7 @@ namespace DungeonCrawler.Elements
         public Dice AttackDice { get; set; }
         public Dice DefenceDice { get; set; }
 
-        public abstract void Update();
+        public abstract void Update(LevelData level, Player player);
         
     }
     

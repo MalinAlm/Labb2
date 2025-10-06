@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace DungeonCrawler.Elements
 {
     internal class Rat : Enemy
     {
+
+        private Random randomPosition = new Random();
+
+        public int RandomMovement()
+        {
+            int randomMovement = randomPosition.Next(4);
+            return randomMovement;
+        }
+    
         public Rat()
         {
             Name = "Rat";
@@ -17,23 +21,50 @@ namespace DungeonCrawler.Elements
             Foreground = ConsoleColor.Red;
         }
 
-
-        public override void Draw()
+        public override void Update(LevelData level, Player player)
         {
-            Console.ForegroundColor = Foreground;
 
-            Console.SetCursorPosition((int)X, (int)Y);
-            Console.Write(Sign);
+            int oldX = X;
+            int oldY = Y;
+
+            int newX = X;
+            int newY = Y;
+
+            int direction = RandomMovement();
+
+            switch (direction)
+            {
+                case 0: 
+                    newY -- ; 
+                    break;
+                case 1: 
+                    newY ++; 
+                    break;
+                case 2: 
+                    newX --; 
+                    break; 
+                case 3: 
+                    newX ++; 
+                    break;
+                default:
+                    break;
+            }
+
+            bool isBlockedByPlayer = level.IsBlocked(newX, newY) || (player.X ==  newX && player.Y == newY);
+            if (isBlockedByPlayer)
+            {
+                return;
+            }
+
+            Console.SetCursorPosition(oldX, oldY);
+            Console.Write(' ');
+
+            X = newX;
+            Y = newY;
+
+            Draw();
+
         }
-
-        public override void Update()
-        { 
-                
-        }
-
-
-
-        
     }
     
 }
