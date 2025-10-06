@@ -24,30 +24,30 @@ namespace DungeonCrawler
             Console.SetCursorPosition(X, Y);
             Console.CursorVisible = false;
             Console.Write(Sign);
-
         }
 
         public override void Update()
         {
-
             int oldXPosition = X;
             int oldYPosition = Y;
 
-            if (LastKey == ConsoleKey.LeftArrow)
+            switch (LastKey)
             {
-                X--; 
-            }
-            else if (LastKey == ConsoleKey.RightArrow)
-            {
-                X++;
-            }
-            else if (LastKey == ConsoleKey.UpArrow)
-            {
-                Y--; 
-            }
-            else if (LastKey == ConsoleKey.DownArrow)
-            {
-                Y++; 
+                case ConsoleKey.LeftArrow:
+                    X--;
+                    break;
+                case ConsoleKey.RightArrow:
+                    X++;
+                    break;
+                case ConsoleKey.UpArrow:
+                    Y--;
+                    break;
+                case ConsoleKey.DownArrow:
+                    Y++;
+                    break;
+                default:
+                    break;
+               
             }
 
             if (_level.IsBlocked( X, Y ))

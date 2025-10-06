@@ -21,29 +21,28 @@ namespace DungeonCrawler
 
                     for (int x = 0; x < line.Length; x++)
                     {
+                        char sign = line[x];
+                        LevelElement? element = null;
 
-                    char sign = line[x];
-                    LevelElement? element = null;
-
-                    switch (sign)
-                    {
-                        case '#':
-                                element = new Wall { X = x, Y = y };
-                                break;
-                        case '@':
-                                PlayerStartPosition = (x, y);
-                                break;
-                        case 'r':
-                                element = new Rat { X = x, Y = y };
-                                break;
+                        switch (sign)
+                        {
+                            case '#':
+                                    element = new Wall { X = x, Y = y };
+                                    break;
+                            case '@':
+                                    PlayerStartPosition = (x, y);
+                                    break;
+                            case 'r':
+                                    element = new Rat { X = x, Y = y };
+                                    break;
                             case 's':
                                 element = new Snake { X = x, Y = y };
                                 break;
                             default:
                                 break;
-                    }
+                        }
 
-                    if (element != null)
+                        if (element != null)
                         {
                             _elements.Add(element);
                         }

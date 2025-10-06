@@ -23,15 +23,12 @@ namespace DungeonCrawler.Elements
 
         public override void Update(LevelData level, Player player)
         {
-
             int oldX = X;
             int oldY = Y;
      
-
             Console.SetCursorPosition(oldX, oldY);
             Console.Write(' ');
 
-           
             Draw();
 
         }

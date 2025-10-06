@@ -8,7 +8,5 @@ namespace DungeonCrawler.Elements
             Sign = '#';
             Foreground = ConsoleColor.Gray;
         }
-
-    }  
-    
+    }    
 }

@@ -4,7 +4,6 @@ namespace DungeonCrawler.Elements
 {
     internal class Rat : Enemy
     {
-
         private Random randomPosition = new Random();
 
         public int RandomMovement()
@@ -23,7 +22,6 @@ namespace DungeonCrawler.Elements
 
         public override void Update(LevelData level, Player player)
         {
-
             int oldX = X;
             int oldY = Y;
 
