@@ -13,7 +13,6 @@ namespace DungeonCrawler
             Sign = '@';
             Health = 100;
             Foreground = ConsoleColor.Magenta;
-
             X = x;
             Y = y;
         }
@@ -28,8 +27,8 @@ namespace DungeonCrawler
 
         public override void Update()
         {
-            int oldXPosition = X;
-            int oldYPosition = Y;
+            int oldX = X;
+            int oldY = Y;
 
             switch (LastKey)
             {
@@ -47,17 +46,16 @@ namespace DungeonCrawler
                     break;
                 default:
                     break;
-               
             }
 
             if (_level.IsBlocked( X, Y ))
             {
-                X = oldXPosition;
-                Y = oldYPosition;
+                X = oldX;
+                Y = oldY;
                 return;
             }
 
-            Console.SetCursorPosition(oldXPosition, oldYPosition);
+            Console.SetCursorPosition(oldX, oldY);
             Console.Write(' ');
 
             Draw();

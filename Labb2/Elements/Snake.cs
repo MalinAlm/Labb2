@@ -25,9 +25,41 @@ namespace DungeonCrawler.Elements
         {
             int oldX = X;
             int oldY = Y;
-     
+
+            int newX = X;
+            int newY = Y;   
+
+            int distanceToPlayer = Math.Abs(X - player.X) + Math.Abs(Y - player.Y);
+            if (distanceToPlayer > 2) return;
+           
+            if (player.X < X)
+            {
+                newX++;
+            }
+            else if (player.X > X)
+            {
+                newX--;
+            }
+
+            if (player.Y < Y)
+            {
+                newY++;
+            }
+            else if (player.Y > Y)
+            {
+                newY--;
+            }
+
+            if (level.IsBlocked(newX, newY))
+            {
+                return;
+            }
+
             Console.SetCursorPosition(oldX, oldY);
             Console.Write(' ');
+
+            X = newX;
+            Y = newY;
 
             Draw();
 
