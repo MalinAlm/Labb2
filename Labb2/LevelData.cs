@@ -7,6 +7,7 @@ namespace DungeonCrawler
         public (int X, int Y)? PlayerStartPosition { get; set; }
         private List<LevelElement> _elements = new();
         public IReadOnlyList<LevelElement> Elements => _elements;
+        private HashSet<(int X, int Y)> _seenPositions = new();
 
         public void Load(string filename)
         {
@@ -52,17 +53,43 @@ namespace DungeonCrawler
                 }
             }
         }
-        public void Draw()
+        public void Draw(Player player)
         {
             foreach (var element in _elements)
             {
-                element.Draw();
+                double distance = Math.Sqrt(
+                    Math.Pow(player.X - element.X, 2) +
+                    Math.Pow(player.Y- element.Y, 2)
+                    );
+
+                bool isVisible = distance <= player.VisionRange;
+
+                if (isVisible)
+                {
+                    _seenPositions.Add((element.X, element.Y));
+                }
+
+                bool hasBeenSeen = _seenPositions.Contains((element.X, element.Y));
+
+                if (isVisible || (element is Wall && hasBeenSeen))
+                {
+                    element.Draw();
+                    
+                }
+                else
+                {
+                    Console.SetCursorPosition(element.X, element.Y);
+                    Console.Write(' ');
+                }
             }
         }
 
         public bool IsBlocked(int x, int y)
         {
-            return _elements.Any(element => element.X == x && element.Y == y && (element is Wall || element is Enemy));
+            return _elements.Any(element =>
+            element.X == x &&
+            element.Y == y && 
+            (element is Wall || element is Enemy));
         }
     }
 }

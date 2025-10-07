@@ -4,7 +4,6 @@ namespace DungeonCrawler
 {
     internal class GameLoop
     {
-        //TODO: urför sedan datorns drag´(uppdatera alla fiender)
         //TODO: ha ev en escape för att avbryta spelet
         public void Run()
         {
@@ -18,7 +17,7 @@ namespace DungeonCrawler
             var start = level.PlayerStartPosition ?? (0,0);
             Player player = new Player(start.X, start.Y, level);
 
-            level.Draw();
+            level.Draw(player);
             player.Draw();
 
             while (true)
@@ -37,7 +36,7 @@ namespace DungeonCrawler
                     }
                 }
 
-                level.Draw();
+                level.Draw(player);
                 player.Draw();
             }
 

@@ -6,6 +6,8 @@ namespace DungeonCrawler
     {
         private LevelData _level;
         public ConsoleKey? LastKey { get; set; }
+        public int VisionRange { get; set; } = 5;
+
         public Player(int x, int y, LevelData level)
         {           
             _level = level;

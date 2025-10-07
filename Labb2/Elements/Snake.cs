@@ -61,8 +61,6 @@ namespace DungeonCrawler.Elements
             X = newX;
             Y = newY;
 
-            Draw();
-
         }
     }
     
