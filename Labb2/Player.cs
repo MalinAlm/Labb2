@@ -13,10 +13,13 @@ namespace DungeonCrawler
             _level = level;
             Name = "Beep Boop";
             Sign = '@';
-            Health = 100;
             Foreground = ConsoleColor.Magenta;
             X = x;
             Y = y;
+
+            Health = 100;
+            AttackDice = new Dice(2, 6, 2);
+            DefenceDice = new Dice(2, 6, 0);
         }
 
         public override void Draw()

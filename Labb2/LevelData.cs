@@ -5,13 +5,13 @@ namespace DungeonCrawler
     internal class LevelData
     {
         public (int X, int Y)? PlayerStartPosition { get; set; }
-        private List<LevelElement> _elements = new();
+        private List<LevelElement> _elements = new List<LevelElement>();
         public IReadOnlyList<LevelElement> Elements => _elements;
         private HashSet<(int X, int Y)> _seenPositions = new();
 
         public void Load(string filename)
         {
-            int y = 0;
+            int y = 2;
 
             using (StreamReader reader = new StreamReader(filename))
             {
@@ -83,7 +83,7 @@ namespace DungeonCrawler
                 }
             }
         }
-
+        //TODO: ändra IsBlocked till isWalkable
         public bool IsBlocked(int x, int y)
         {
             return _elements.Any(element =>

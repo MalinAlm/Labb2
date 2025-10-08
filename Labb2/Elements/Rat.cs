@@ -1,4 +1,4 @@
-﻿
+﻿using DungeonCrawler;
 
 namespace DungeonCrawler.Elements
 {
@@ -16,8 +16,12 @@ namespace DungeonCrawler.Elements
         {
             Name = "Rat";
             Sign = 'r';
-            Health = 10;
             Foreground = ConsoleColor.Red;
+
+            Health = 10;
+            AttackDice = new Dice(1, 6, 3);
+            DefenceDice = new Dice(1, 6, 1);
+
         }
 
         public override void Update(LevelData level, Player player)
