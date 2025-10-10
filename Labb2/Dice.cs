@@ -7,7 +7,6 @@ namespace DungeonCrawler
         private int _numberOfDice = 0;
         private int _sidesPerDice = 0;
         private int _modifier = 0;
-
         private Random _random = new Random();
 
         public Dice(int numberOfDice, int sidesPerDice, int modifier)

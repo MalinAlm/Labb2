@@ -27,11 +27,11 @@ namespace DungeonCrawler.Elements
         {
             int oldX = X;
             int oldY = Y;
-
             int newX = X;
-            int newY = Y;   
-
+            int newY = Y;  
+            
             int distanceToPlayer = Math.Abs(X - player.X) + Math.Abs(Y - player.Y);
+
             if (distanceToPlayer > 2) return;
 
             if (player.X == X && player.Y == Y)
@@ -71,5 +71,4 @@ namespace DungeonCrawler.Elements
 
         }
     }
-    
 }
