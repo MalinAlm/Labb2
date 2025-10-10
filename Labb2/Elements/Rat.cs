@@ -52,8 +52,16 @@ namespace DungeonCrawler.Elements
                     break;
             }
 
-            bool isBlockedByPlayer = level.IsBlocked(newX, newY) || (player.X ==  newX && player.Y == newY);
-            if (isBlockedByPlayer)
+            if (player.X == newX && player.Y == newY)
+            {
+                Combat.ResolveEnemyAttack(this, player, level);
+                return;
+            }
+
+            //bool isBlockedByPlayer = level.IsBlocked(newX, newY) || (player.X ==  newX && player.Y == newY);
+            bool isBlocked = level.IsBlocked(newX, newY);
+            //if (isBlockedByPlayer)
+            if (isBlocked)
             {
                 return;
             }

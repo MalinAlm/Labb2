@@ -33,6 +33,12 @@ namespace DungeonCrawler.Elements
 
             int distanceToPlayer = Math.Abs(X - player.X) + Math.Abs(Y - player.Y);
             if (distanceToPlayer > 2) return;
+
+            if (player.X == X && player.Y == Y)
+            {
+                Combat.ResolveEnemyAttack(this, player, level);
+                return;
+            }
            
             if (player.X < X)
             {

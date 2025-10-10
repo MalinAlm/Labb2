@@ -14,14 +14,14 @@ namespace DungeonCrawler
             LevelData level = new LevelData();
             level.Load(filePath);
 
-            var start = level.PlayerStartPosition ?? (0,0);
+            var start = level.PlayerStartPosition ?? (0, 0);
             Player player = new Player(start.X, start.Y, level);
 
             level.Draw(player);
             player.Draw();
 
             while (true)
-            {
+            {   
                 var key = Console.ReadKey(true).Key;
                 player.LastKey = key;
             

@@ -53,6 +53,16 @@ namespace DungeonCrawler
                     break;
             }
 
+            Enemy? enemy = _level.Elements.OfType<Enemy>().FirstOrDefault(e => e.X == X && e.Y == Y);
+            if (enemy != null)
+            {
+                Combat.ResolvePlayerAttack(this, enemy, _level);
+
+                X = oldX;
+                Y = oldY;
+                return;
+            }
+             
             if (_level.IsBlocked( X, Y ))
             {
                 X = oldX;
@@ -62,9 +72,7 @@ namespace DungeonCrawler
 
             Console.SetCursorPosition(oldX, oldY);
             Console.Write(' ');
-
             Draw();
-
         }
     }
 }

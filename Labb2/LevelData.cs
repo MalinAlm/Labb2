@@ -5,13 +5,14 @@ namespace DungeonCrawler
     internal class LevelData
     {
         public (int X, int Y)? PlayerStartPosition { get; set; }
-        private List<LevelElement> _elements = new List<LevelElement>();
+        private List<LevelElement> _elements = new();
         public IReadOnlyList<LevelElement> Elements => _elements;
         private HashSet<(int X, int Y)> _seenPositions = new();
+        //ev ha en lista istället för hashset men blir långsammare
 
         public void Load(string filename)
         {
-            int y = 2;
+            int y = 4;
 
             using (StreamReader reader = new StreamReader(filename))
             {
@@ -32,7 +33,7 @@ namespace DungeonCrawler
                                     break;
                             case '@':
                                     PlayerStartPosition = (x, y);
-                                    break;
+                                break;
                             case 'r':
                                     element = new Rat { X = x, Y = y };
                                     break;
@@ -74,7 +75,6 @@ namespace DungeonCrawler
                 if (isVisible || (element is Wall && hasBeenSeen))
                 {
                     element.Draw();
-                    
                 }
                 else
                 {
@@ -90,6 +90,11 @@ namespace DungeonCrawler
             element.X == x &&
             element.Y == y && 
             (element is Wall || element is Enemy));
+        }
+
+        public void RemoveElement(LevelElement element)
+        {
+            _elements.Remove(element);
         }
     }
 }
