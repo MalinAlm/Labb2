@@ -12,7 +12,7 @@ namespace DungeonCrawler
 
             Console.SetCursorPosition(0, targetLine);
             Console.ForegroundColor = color;
-            Console.Write(new String(' ', Console.WindowWidth));
+            Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, targetLine);
             Console.Write(message);
             Console.ResetColor();
@@ -28,77 +28,61 @@ namespace DungeonCrawler
             PerformAttack(enemy, player, level);
         }
 
-        private static void PerformAttack(dynamic attacker, dynamic defender, LevelData level)
+        private static int DoAttack(Character attacker, Character defender, int line, string actionText, LevelData level)
         {
-            for (int line = 0; line < 4; line++)
-            {
-                WriteMessage(string.Empty, line);
-            }
-            
             int attackRoll = attacker.AttackDice.Throw();
             int defenceRoll = defender.DefenceDice.Throw();
             int damage = attackRoll - defenceRoll;
 
             if (damage > 0) defender.Health = Math.Max(0, defender.Health - damage);
-            
-            string attackMessage;
+
+            string baseText = $"{attacker.Name} {actionText} {defender.Name}! " +
+                $"(attack {attacker.AttackDice}: {attackRoll}, defense {defender.DefenceDice}: {defenceRoll})";
+
+            string message;
 
             if (damage > 0)
             {
-                attackMessage = $"{attacker.Name} attacks {defender.Name}  (attack {attacker.AttackDice}: {attackRoll}, defense {defender.DefenceDice}: {defenceRoll}) -> {damage} damage!";
+                message = $"{baseText} -> {damage} damage!";
             }
             else
             {
-                attackMessage = $"{attacker.Name} attacks {defender.Name}  (attack {attacker.AttackDice}: {attackRoll}, defense {defender.DefenceDice}: {defenceRoll}) -> {defender.Name} blocked the attack!";
+                message = $"{baseText} - blocked!";
             }
 
-            ConsoleColor attackColor = ConsoleColor.DarkCyan; 
+            ConsoleColor attackColor = ConsoleColor.DarkCyan;
             if (defender is Player)
             {
                 attackColor = damage > 0 ? ConsoleColor.Red : ConsoleColor.Green;
             }
 
-            WriteMessage(attackMessage, 0, attackColor);
+            WriteMessage(message, line, attackColor);
+            return damage;
+        }
+
+
+        private static void PerformAttack(Character attacker, Character defender, LevelData level)
+        {
+            for (int line = 0; line < 4; line++)
+            {
+                WriteMessage(string.Empty, line);
+            }
+
+            DoAttack(attacker, defender, 0, "attacks", level);
 
             if (defender.Health > 0)
             {
-                int counterAttackRoll = defender.AttackDice.Throw();
-                int counterDefenceRoll = attacker.DefenceDice.Throw();
-                int counterDamage = counterAttackRoll - counterDefenceRoll;
+                DoAttack(defender, attacker, 1, "hits back!", level);
 
-                if (counterDamage > 0)
+                if (attacker is Player player && player.Health <= 0)
                 {
-                    attacker.Health = Math.Max (0, attacker.Health - counterDamage);
-                }
-
-                string counterMessage;
-                if (counterDamage > 0)
-                {
-                    counterMessage = $"{defender.Name} hits back! {defender.AttackDice}  (attack {defender.AttackDice}: {counterAttackRoll}, defense {attacker.DefenceDice}: {counterDefenceRoll}) -> {counterDamage} damage!";
-                }
-                else
-                {
-                    counterMessage = $"{defender.Name} hits back! {defender.AttackDice}  (attack {defender.AttackDice}: {counterAttackRoll}, defense {attacker.DefenceDice}: {counterDefenceRoll}) -> {attacker.Name} blocked the attack!";
-                }
-
-                ConsoleColor counterColor = ConsoleColor.DarkCyan;
-                if (attacker is Player)
-                {
-                    counterColor = counterDamage > 0 ? ConsoleColor.Red : ConsoleColor.Green;
-                }
-
-                WriteMessage (counterMessage, 1, counterColor);
-
-                if (attacker.Health <= 0 && attacker is Player)
-                {
-                    WriteMessage($"Oh no! You have been defeated! Game over!", 2);
-                    Thread.Sleep(3000);
-                    Environment.Exit(0); 
+                    player.GameOver();
+                    WriteMessage($"Oh no! You have been defeated! Game over!", 2, ConsoleColor.Red);
                 }
             }
             else
             {
-                WriteMessage($"Yaay! {defender.Name} has been killed!!", 2);
+                WriteMessage($"Yaay! {defender.Name} has been killed!", 2);
                 if (defender is Enemy)
                 {
                     Console.SetCursorPosition(defender.X, defender.Y);

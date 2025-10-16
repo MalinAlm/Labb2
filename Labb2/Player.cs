@@ -7,9 +7,10 @@ namespace DungeonCrawler
         private LevelData _level;
         public ConsoleKey? LastKey { get; set; }
         public int VisionRange { get; set; } = 5;
+        public bool IsAlive { get; private set; } = true;
 
         public Player(int x, int y, LevelData level)
-        {           
+        {     
             _level = level;
             Name = "Beep Boop";
             Sign = '@';
@@ -40,8 +41,17 @@ namespace DungeonCrawler
             Console.Write($"{Name} - HP: {Health}/100");
         }
 
+        public void GameOver()
+        {
+            IsAlive = false;
+            Foreground = ConsoleColor.DarkGray;
+            Draw();
+        }
+
         public override void Update()
         {
+            if (!IsAlive) return;
+
             int newX = X;
             int newY = Y;
 

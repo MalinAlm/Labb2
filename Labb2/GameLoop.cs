@@ -13,7 +13,7 @@ namespace DungeonCrawler
             LevelData level = new LevelData();
             level.Load(filePath);
 
-            var start = level.PlayerStartPosition ?? (1, 1);
+            var start = level.PlayerStartPosition ?? (1, 6);
             Player player = new Player(start.X, start.Y, level);
 
             level.Draw(player);
