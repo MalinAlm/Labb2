@@ -16,7 +16,6 @@ namespace DungeonCrawler
             Foreground = ConsoleColor.Magenta;
             X = x;
             Y = y;
-
             Health = 100;
             AttackDice = new Dice(2, 6, 2);
             DefenceDice = new Dice(2, 6, 0);
@@ -32,36 +31,33 @@ namespace DungeonCrawler
 
         public override void Update()
         {
-            int oldX = X;
-            int oldY = Y;
+            int newX = X;
+            int newY = Y;
 
             switch (LastKey)
             {
-                case ConsoleKey.LeftArrow: X--; break;
-                case ConsoleKey.RightArrow: X++;break;
-                case ConsoleKey.UpArrow: Y--; break;
-                case ConsoleKey.DownArrow: Y++; break;
+                case ConsoleKey.LeftArrow: newX--; break;
+                case ConsoleKey.RightArrow: newX++;break;
+                case ConsoleKey.UpArrow: newY--; break;
+                case ConsoleKey.DownArrow: newY++; break;
             }
 
-            Enemy? enemy = _level.Elements.OfType<Enemy>().FirstOrDefault(e => e.X == X && e.Y == Y);
+            Enemy? enemy = _level.Elements.OfType<Enemy>().FirstOrDefault(e => e.X == newX && e.Y == newY);
+
             if (enemy != null)
             {
                 Combat.ResolvePlayerAttack(this, enemy, _level);
-
-                X = oldX;
-                Y = oldY;
-                return;
-            }
-             
-            if (_level.IsBlocked( X, Y ))
-            {
-                X = oldX;
-                Y = oldY;
                 return;
             }
 
-            Console.SetCursorPosition(oldX, oldY);
+            if (!_level.IsWalkable(newX, newY)) return;
+
+            Console.SetCursorPosition(X, Y);
             Console.Write(' ');
+
+            X = newX;
+            Y = newY;
+
             Draw();
         }
     }

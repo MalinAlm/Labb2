@@ -4,20 +4,11 @@ namespace DungeonCrawler.Elements
 {
     internal class Snake : Enemy
     {
-        private Random randomPosition = new Random();
-
-        public int RandomMovement()
-        {
-            int randomMovement = randomPosition.Next(0, 4);
-            return randomMovement;
-        }
-
         public Snake()
         {
             Name = "Snake";
             Sign = 's';
             Foreground = ConsoleColor.Green;
-
             Health = 25;
             AttackDice = new Dice(3, 4, 2);
             DefenceDice = new Dice(1, 8, 5);
@@ -25,8 +16,6 @@ namespace DungeonCrawler.Elements
 
         public override void Update(LevelData level, Player player)
         {
-            int oldX = X;
-            int oldY = Y;
             int newX = X;
             int newY = Y;  
             
@@ -46,9 +35,9 @@ namespace DungeonCrawler.Elements
             if (player.Y < Y) newY++;
             else if (player.Y > Y) newY--;
 
-            if (level.IsBlocked(newX, newY)) return;
+            if (!level.IsWalkable(newX, newY)) return;
 
-            Console.SetCursorPosition(oldX, oldY);
+            Console.SetCursorPosition(X, Y);
             Console.Write(' ');
 
             X = newX;

@@ -82,10 +82,10 @@ namespace DungeonCrawler
                 }
             }
         }
-        //TODO: ändra IsBlocked till isWalkable
-        public bool IsBlocked(int x, int y)
+
+        public bool IsWalkable(int x, int y)
         {
-            return _elements.Any(element =>
+            return !_elements.Any(element =>
             element.X == x &&
             element.Y == y && 
             (element is Wall || element is Enemy));
