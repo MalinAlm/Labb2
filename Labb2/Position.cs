@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace DungeonCrawler
 {
+    //This struct will be used in future refactoring of code
+
     public readonly struct Position
     {
         public int X { get; }
