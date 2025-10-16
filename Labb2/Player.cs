@@ -2,7 +2,7 @@
 
 namespace DungeonCrawler
 {
-    internal class Player : MainCharacter
+    internal class Player : Character
     {
         private LevelData _level;
         public ConsoleKey? LastKey { get; set; }
@@ -37,20 +37,10 @@ namespace DungeonCrawler
 
             switch (LastKey)
             {
-                case ConsoleKey.LeftArrow:
-                    X--;
-                    break;
-                case ConsoleKey.RightArrow:
-                    X++;
-                    break;
-                case ConsoleKey.UpArrow:
-                    Y--;
-                    break;
-                case ConsoleKey.DownArrow:
-                    Y++;
-                    break;
-                default:
-                    break;
+                case ConsoleKey.LeftArrow: X--; break;
+                case ConsoleKey.RightArrow: X++;break;
+                case ConsoleKey.UpArrow: Y--; break;
+                case ConsoleKey.DownArrow: Y++; break;
             }
 
             Enemy? enemy = _level.Elements.OfType<Enemy>().FirstOrDefault(e => e.X == X && e.Y == Y);

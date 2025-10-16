@@ -33,20 +33,10 @@ namespace DungeonCrawler.Elements
 
             switch (direction)
             {
-                case 0: 
-                    newY -- ; 
-                    break;
-                case 1: 
-                    newY ++; 
-                    break;
-                case 2: 
-                    newX --; 
-                    break; 
-                case 3: 
-                    newX ++; 
-                    break;
-                default:
-                    break;
+                case 0: newY --; break;
+                case 1: newY ++; break;
+                case 2: newX --; break; 
+                case 3: newX ++; break;
             }
 
             if (player.X == newX && player.Y == newY)

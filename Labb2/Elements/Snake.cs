@@ -40,28 +40,13 @@ namespace DungeonCrawler.Elements
                 return;
             }
            
-            if (player.X < X)
-            {
-                newX++;
-            }
-            else if (player.X > X)
-            {
-                newX--;
-            }
+            if (player.X < X) newX++;
+            else if (player.X > X) newX--;
 
-            if (player.Y < Y)
-            {
-                newY++;
-            }
-            else if (player.Y > Y)
-            {
-                newY--;
-            }
+            if (player.Y < Y) newY++;
+            else if (player.Y > Y) newY--;
 
-            if (level.IsBlocked(newX, newY))
-            {
-                return;
-            }
+            if (level.IsBlocked(newX, newY)) return;
 
             Console.SetCursorPosition(oldX, oldY);
             Console.Write(' ');

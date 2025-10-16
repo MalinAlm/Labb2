@@ -8,7 +8,6 @@ namespace DungeonCrawler
         private List<LevelElement> _elements = new();
         public IReadOnlyList<LevelElement> Elements => _elements;
         private HashSet<(int X, int Y)> _seenPositions = new();
-        //ev ha en lista istället för hashset men blir långsammare
 
         public void Load(string filename)
         {

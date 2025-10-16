@@ -4,7 +4,6 @@ namespace DungeonCrawler
 {
     internal class GameLoop
     {
-        //TODO: ha ev en escape för att avbryta spelet
         public void Run()
         {
             string currentDirectory = Directory.GetCurrentDirectory();
@@ -20,11 +19,23 @@ namespace DungeonCrawler
             level.Draw(player);
             player.Draw();
 
-            while (true)
+            bool isRunning = true;
+
+            while (isRunning)
             {   
                 var key = Console.ReadKey(true).Key;
+
+                if (key == ConsoleKey.Escape)
+                {
+                    Console.SetCursorPosition(0, 0);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Exiting game... Bye!!");
+                    Thread.Sleep(2000);
+                    isRunning = false;
+                    break;
+                }
+
                 player.LastKey = key;
-            
                 player.Update();
 
                 for (int i = 0; i < level.Elements.Count; i++)
