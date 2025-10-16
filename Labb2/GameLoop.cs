@@ -18,6 +18,7 @@ namespace DungeonCrawler
 
             level.Draw(player);
             player.Draw();
+            player.DrawPlayerStatus();
 
             bool isRunning = true;
 
@@ -49,6 +50,7 @@ namespace DungeonCrawler
 
                 level.Draw(player);
                 player.Draw();
+                player.DrawPlayerStatus();
             }
 
         }

@@ -11,7 +11,7 @@ namespace DungeonCrawler
 
         public void Load(string filename)
         {
-            int y = 4;
+            int y = 5;
 
             using (StreamReader reader = new StreamReader(filename))
             {

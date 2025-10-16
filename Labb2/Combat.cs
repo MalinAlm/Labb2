@@ -5,32 +5,33 @@ namespace DungeonCrawler
 {
     internal static class Combat
     {
-        private static void WriteMessage(string message, int line = 0)
+        private static void WriteMessage(string message, int line = 0, ConsoleColor color = ConsoleColor.DarkCyan)
         {
-            Console.SetCursorPosition(0, line);
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            int verticalOffset = 1;
+            int targetLine = line + verticalOffset;
+
+            Console.SetCursorPosition(0, targetLine);
+            Console.ForegroundColor = color;
             Console.Write(new String(' ', Console.WindowWidth));
-            Console.SetCursorPosition(0, line);
+            Console.SetCursorPosition(0, targetLine);
             Console.Write(message);
+            Console.ResetColor();
         }
 
         public static void ResolvePlayerAttack(Player player, Enemy enemy, LevelData level)
         {
-            WriteMessage($"{player.Name} attacks {enemy.Name}! ");
             PerformAttack(player, enemy, level);
         }
 
         public static void ResolveEnemyAttack(Enemy enemy, Player player, LevelData level)
         {
-            WriteMessage($"{enemy.Name} attacks {player.Name}!");
             PerformAttack(enemy, player, level);
         }
 
         private static void PerformAttack(dynamic attacker, dynamic defender, LevelData level)
         {
-            for (int line = 0; line <= 3; line++)
+            for (int line = 0; line < 4; line++)
             {
-                Console.SetCursorPosition(0, line);
                 WriteMessage(string.Empty, line);
             }
             
@@ -51,7 +52,13 @@ namespace DungeonCrawler
                 attackMessage = $"{attacker.Name} attacks {defender.Name}  (attack {attacker.AttackDice}: {attackRoll}, defense {defender.DefenceDice}: {defenceRoll}) -> {defender.Name} blocked the attack!";
             }
 
-            WriteMessage(attackMessage, 0);
+            ConsoleColor attackColor = ConsoleColor.DarkCyan; 
+            if (defender is Player)
+            {
+                attackColor = damage > 0 ? ConsoleColor.Red : ConsoleColor.Green;
+            }
+
+            WriteMessage(attackMessage, 0, attackColor);
 
             if (defender.Health > 0)
             {
@@ -74,7 +81,13 @@ namespace DungeonCrawler
                     counterMessage = $"{defender.Name} hits back! {defender.AttackDice}  (attack {defender.AttackDice}: {counterAttackRoll}, defense {attacker.DefenceDice}: {counterDefenceRoll}) -> {attacker.Name} blocked the attack!";
                 }
 
-                WriteMessage (counterMessage, 1);
+                ConsoleColor counterColor = ConsoleColor.DarkCyan;
+                if (attacker is Player)
+                {
+                    counterColor = counterDamage > 0 ? ConsoleColor.Red : ConsoleColor.Green;
+                }
+
+                WriteMessage (counterMessage, 1, counterColor);
 
                 if (attacker.Health <= 0 && attacker is Player)
                 {
@@ -94,7 +107,9 @@ namespace DungeonCrawler
                 }
             }
 
-            WriteMessage($"HP: {attacker.Name} {attacker.Health} | HP: {defender.Name} {defender.Health}", 3);
+            if (attacker is Player p1) p1.DrawPlayerStatus();
+            if (defender is Player p2) p2.DrawPlayerStatus();
+
             Thread.Sleep(800);
         }
     }

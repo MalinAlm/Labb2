@@ -29,6 +29,17 @@ namespace DungeonCrawler
             Console.Write(Sign);
         }
 
+        public void DrawPlayerStatus()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.SetCursorPosition(0, 0);
+
+            Console.Write(new string(' ', Console.WindowWidth));
+
+            Console.SetCursorPosition(0, 0);
+            Console.Write($"{Name} - HP: {Health}/100");
+        }
+
         public override void Update()
         {
             int newX = X;
