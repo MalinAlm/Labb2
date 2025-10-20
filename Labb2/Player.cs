@@ -26,7 +26,6 @@ namespace DungeonCrawler
         {
             Console.ForegroundColor = Foreground;
             Console.SetCursorPosition(X, Y);
-            Console.CursorVisible = false;
             Console.Write(Sign);
         }
 

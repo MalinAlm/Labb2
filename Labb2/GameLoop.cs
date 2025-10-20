@@ -10,6 +10,9 @@ namespace DungeonCrawler
             string projectRoot = Path.GetFullPath(Path.Combine(currentDirectory, @".\Levels"));
             string filePath = Path.Combine(projectRoot, "Level1.txt");
 
+            Console.CursorVisible = false;
+
+
             LevelData level = new LevelData();
             level.Load(filePath);
 

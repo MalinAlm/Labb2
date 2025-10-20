@@ -16,5 +16,10 @@ namespace DungeonCrawler.Elements
         {
 
         }
+        public virtual void Update(LevelData level, Player player)
+        {
+
+        }
+
     }
 }

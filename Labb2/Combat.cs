@@ -28,7 +28,7 @@ namespace DungeonCrawler
             PerformAttack(enemy, player, level);
         }
 
-        private static int DoAttack(Character attacker, Character defender, int line, string actionText, LevelData level)
+        private static int StartAttack(Character attacker, Character defender, int line, string actionText, LevelData level)
         {
             int attackRoll = attacker.AttackDice.Throw();
             int defenceRoll = defender.DefenceDice.Throw();
@@ -68,11 +68,11 @@ namespace DungeonCrawler
                 WriteMessage(string.Empty, line);
             }
 
-            DoAttack(attacker, defender, 0, "attacks", level);
+            StartAttack(attacker, defender, 0, "attacks", level);
 
             if (defender.Health > 0)
             {
-                DoAttack(defender, attacker, 1, "hits back!", level);
+                StartAttack(defender, attacker, 1, "hits back!", level);
 
                 if (attacker is Player player && player.Health <= 0)
                 {
