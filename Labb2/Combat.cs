@@ -94,7 +94,6 @@ namespace DungeonCrawler
             if (attacker is Player p1) p1.DrawPlayerStatus();
             if (defender is Player p2) p2.DrawPlayerStatus();
 
-            Thread.Sleep(800);
         }
     }
 }
